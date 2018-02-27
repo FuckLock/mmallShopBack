@@ -11,6 +11,7 @@ public class ServerResponse<T> implements Serializable {
     private ServerResponse(int status){
         this.status = status;
     }
+
     private ServerResponse(int status, T data){
         this.status = status;
         this.data = data;
@@ -27,18 +28,20 @@ public class ServerResponse<T> implements Serializable {
         this.msg = msg;
     }
 
-    public boolean isSuccess(){
-        return this.status == ResponseCode.SUCCESS.getCode();
-    }
-
     public int getStatus(){
         return status;
     }
+
     public T getData(){
         return data;
     }
+
     public String getMsg(){
         return msg;
+    }
+
+    public boolean isSuccess(){
+        return this.status == ResponseCode.SUCCESS.getCode();
     }
 
     public static <T> ServerResponse<T> createBySuccess(){
@@ -62,7 +65,6 @@ public class ServerResponse<T> implements Serializable {
         return new ServerResponse<T>(ResponseCode.ERROR.getCode(),ResponseCode.ERROR.getDesc());
     }
 
-
     public static <T> ServerResponse<T> createByErrorMessage(String errorMessage){
         return new ServerResponse<T>(ResponseCode.ERROR.getCode(),errorMessage);
     }
@@ -70,4 +72,5 @@ public class ServerResponse<T> implements Serializable {
     public static <T> ServerResponse<T> createByErrorCodeMessage(int errorCode,String errorMessage){
         return new ServerResponse<T>(errorCode,errorMessage);
     }
+
 }
