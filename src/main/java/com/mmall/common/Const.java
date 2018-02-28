@@ -11,4 +11,6 @@ public class Const {
         int ROLE_ADMIN = 1;    //管理员
     }
 
+
+
 }
