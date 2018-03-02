@@ -179,12 +179,12 @@
     where username = #{username}
   </select>
 
-  <select id="checkAnswer" resultType="string" parameterType="string">
+  <select id="checkAnswer" resultType="int" parameterType="map">
     select
     count(1)
     from mmall_user
     where username = #{username}
-    and qeustion = #{question}
+    and question = #{question}
     and answer = #{answer}
   </select>
 
