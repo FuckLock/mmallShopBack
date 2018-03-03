@@ -30,7 +30,8 @@ public class UserServiceImpl implements IUserService {
         }
 
         //用户存在的话进一步判断用户名和密码
-        User user  = userMapper.selectLogin(username, password);
+        String md5Password = MD5Util.MD5EncodeUtf8(password);
+        User user  = userMapper.selectLogin(username,md5Password);
 
         if(user == null){
             return ServerResponse.createByErrorMessage("密码错误");
@@ -62,7 +63,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     //注册用户校验逻辑
-    public ServerResponse<String> checkValid(String str,String type){
+    public ServerResponse<String> checkValid(String str, String type){
         if(org.apache.commons.lang3.StringUtils.isNotBlank(type)){
             if(Const.USERNAME.equals(type)){
                 int resultCount = userMapper.checkUsername(str);
@@ -191,5 +192,6 @@ public class UserServiceImpl implements IUserService {
         }
         return ServerResponse.createByError();
     }
+
 
 }

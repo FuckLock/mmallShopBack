@@ -20,6 +20,13 @@ public class UserController {
     @Autowired
     private IUserService iUserService;
 
+    /**
+     * 用户登录
+     * @param username
+     * @param password
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
@@ -45,7 +52,7 @@ public class UserController {
 
     @RequestMapping(value = "check_valid.do",method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<String> checkValid(String str,String type){
+    public ServerResponse<String> checkValid(String str, String type){
         return iUserService.checkValid(str,type);
     }
 
@@ -119,7 +126,5 @@ public class UserController {
         }
         return iUserService.getInformation(currentUser.getId());
     }
-
-
 
 }
