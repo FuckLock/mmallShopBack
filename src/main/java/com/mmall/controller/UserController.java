@@ -30,7 +30,7 @@ public class UserController {
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
-        ServerResponse<User> response = iUserService.login(username,password);
+        ServerResponse<User> response = iUserService.login(username, password);
         if(response.isSuccess()){
             session.setAttribute(Const.CURRENT_USER,response.getData());
         }
@@ -46,7 +46,7 @@ public class UserController {
 
     @RequestMapping(value = "register.do",method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<String> register(User user){
+    public ServerResponse register(User user){
         return iUserService.register(user);
     }
 

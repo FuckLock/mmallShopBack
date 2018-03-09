@@ -11,6 +11,9 @@
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <!--<context:component-scan base-package="com.mmall"></context:component-scan>-->
+    <bean id="validUser" class="com.mmall.common.ValidUser"></bean>
+    <aop:aspectj-autoproxy proxy-target-class="true" />
 
     <import resource="applicationContext-datasource.xml"/>
 
