@@ -55,7 +55,5 @@
     <!-- aop 切面 -->
 
     <!-- 开启aop注解方式 -->
-
-
-
+    <aop:aspectj-autoproxy proxy-target-class="true" />
 </beans>

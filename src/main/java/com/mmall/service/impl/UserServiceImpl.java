@@ -26,7 +26,7 @@ public class UserServiceImpl implements IUserService {
         //用户登录先通过用户名到数据库中查找这个用户是否存在
         int resultCount = userMapper.checkUsername(username);
 
-        if(resultCount == 0 ){
+        if(resultCount == 0){
             return ServerResponse.createByErrorMessage("用户名不存在");
         }
 
