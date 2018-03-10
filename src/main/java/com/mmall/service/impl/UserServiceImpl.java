@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 
@@ -31,18 +32,18 @@ public class UserServiceImpl implements IUserService {
 
         //用户存在的话进一步判断用户名和密码
         String md5Password = MD5Util.MD5EncodeUtf8(password);
-        User user  = userMapper.selectLogin(username,md5Password);
+        User user  = userMapper.selectLogin(username, md5Password);
 
         if(user == null){
             return ServerResponse.createByErrorMessage("密码错误");
         }
 
-        user.setPassword(org.apache.commons.lang3.StringUtils.EMPTY);
+        user.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySuccess("登录成功", user);
     }
 
     //注册用户
-    public ServerResponse<String> register(User user){
+    public ServerResponse register(User user){
         ServerResponse validResponse = this.checkValid(user.getUsername(), Const.USERNAME);
         if(!validResponse.isSuccess()){
             return validResponse;
@@ -187,11 +188,17 @@ public class UserServiceImpl implements IUserService {
      * @return
      */
     public ServerResponse checkAdminRole(User user){
-        if(user != null && user.getRole().intValue() == Const.Role.ROLE_ADMIN){
+        if (user != null && user.getRole().intValue() == Const.Role.ROLE_ADMIN){
             return ServerResponse.createBySuccess();
         }
         return ServerResponse.createByError();
     }
 
-
+    public boolean isAdmin(User user){
+        if (user != null && user.getRole().intValue() == Const.Role.ROLE_ADMIN) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
