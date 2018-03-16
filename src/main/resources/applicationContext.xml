@@ -11,10 +11,11 @@
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <!--<context:component-scan base-package="com.mmall"></context:component-scan>-->
-    <!--<context:component-scan base-package="com.mmall" annotation-config="true"/>-->
-    <bean id="validUser" class="com.mmall.common.ValidUser"></bean>
 
+    <context:component-scan base-package="com.mmall">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <bean id="validUser" class="com.mmall.common.ValidUser"></bean>
 
     <import resource="applicationContext-datasource.xml"/>
 

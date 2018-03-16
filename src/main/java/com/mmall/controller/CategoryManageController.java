@@ -23,28 +23,26 @@ public class CategoryManageController {
 
     @RequestMapping("add_category.do")
     @ResponseBody
-    public ServerResponse addCategory(HttpSession session, String categoryName,
+    public ServerResponse addCategory(String categoryName,
                                       @RequestParam(value = "parentId", defaultValue = "0") int parentId){
         return iCategoryService.addCategory(categoryName, parentId);
     }
 
     @RequestMapping("set_category_name.do")
     @ResponseBody
-    public ServerResponse setCategoryName(HttpSession session, Integer categoryId, String categoryName){
+    public ServerResponse setCategoryName(Integer categoryId, String categoryName){
         return iCategoryService.updateCategoryName(categoryId,categoryName);
     }
 
     @RequestMapping("get_category.do")
     @ResponseBody
-    public ServerResponse getChildrenParallelCategory(HttpSession session,
-                                                      @RequestParam(value = "categoryId" , defaultValue = "0") Integer categoryId){
+    public ServerResponse getChildrenParallelCategory(@RequestParam(value = "categoryId" , defaultValue = "0") Integer categoryId){
         return iCategoryService.getChildrenParallelCategory(categoryId);
     }
 
     @RequestMapping("get_deep_category.do")
     @ResponseBody
-    public ServerResponse getCategoryAndDeepChildrenCategory(HttpSession session,
-                                                              @RequestParam(value = "categoryId" , defaultValue = "0") Integer categoryId){
+    public ServerResponse getCategoryAndDeepChildrenCategory(@RequestParam(value = "categoryId" , defaultValue = "0") Integer categoryId){
         return iCategoryService.selectCategoryAndChildrenById(categoryId);
     }
 }

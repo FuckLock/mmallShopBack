@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 public interface IUserService {
 
-    ServerResponse<User> login(String username, String password);
+    ServerResponse<User> login(String username, String password, HttpSession session);
 
     ServerResponse<String> register(User user);
 
@@ -27,5 +27,4 @@ public interface IUserService {
 
     ServerResponse checkAdminRole(User user);
 
-    boolean isAdmin(User user);
 }

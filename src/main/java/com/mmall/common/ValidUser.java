@@ -12,7 +12,11 @@ import javax.servlet.http.HttpSession;
 
 @Aspect
 public class ValidUser {
-    @Around("execution(* com.mmall.controller.*.*(..)) && !execution(* com.mmall.controller.UserController.*(..))")
+
+    // 判断是否是管理员用户
+    @Around("execution(* com.mmall.controller.CategoryManageController.*(..)) " +
+            "or execution(* com.mmall.controller.ProductController.*(..)) " +
+            "or execution(* com.mmall.controller.ProductManageController.*(..))" )
     public Object validIdentity(ProceedingJoinPoint joinPoint) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
@@ -23,6 +27,22 @@ public class ValidUser {
             return ServerResponse.createByErrorMessage("无权限操作");
         }else {
             return joinPoint.proceed();
+        }
+    }
+
+    //判断用户是否登录
+    @Around("execution(* com.mmall.controller.CartController.*(..)) " +
+            "or execution(* com.mmall.controller.ShippingController.*(..))")
+    public Object validLogin(ProceedingJoinPoint joinPoint) throws Throwable {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }else {
+            Object[] args = joinPoint.getArgs();
+            args[0] = user;
+            return joinPoint.proceed(args);
         }
     }
 }
