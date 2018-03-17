@@ -29,7 +29,7 @@
     from mmall_order
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from mmall_order
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -198,4 +198,18 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByUserIdAndOrderNo" resultType="com.mmall.pojo.Order">
+    SELECT from mmall_order
+    where user_id = #{userId}
+    and order_no = #{orderNo}
+  </select>
+    <select id="selectByOrderNo" resultType="com.mmall.pojo.Order">
+      SELECT
+      <include refid="Base_Column_List">
+      </include>
+      FROM  mmall_order
+      where order_no = #{orderNo}
+    </select>
+
 </mapper>

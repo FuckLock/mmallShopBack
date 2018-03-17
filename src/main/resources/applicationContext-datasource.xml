@@ -13,6 +13,7 @@
     <!-- 加载db.properties文件中的内容，db.properties文件中key命名要有一定的特殊规则 -->
     <context:property-placeholder location="classpath:datasource.properties" />
 
+
     <!-- 配置数据源 ，dbcp -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${db.driverClassName}"/>
