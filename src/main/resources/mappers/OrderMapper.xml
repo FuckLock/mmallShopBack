@@ -199,15 +199,17 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectByUserIdAndOrderNo" resultType="com.mmall.pojo.Order">
-    SELECT from mmall_order
+  <select id="selectByUserIdAndOrderNo" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"></include>
+    from mmall_order
     where user_id = #{userId}
     and order_no = #{orderNo}
   </select>
-    <select id="selectByOrderNo" resultType="com.mmall.pojo.Order">
+
+    <select id="selectByOrderNo" resultMap="BaseResultMap">
       SELECT
-      <include refid="Base_Column_List">
-      </include>
+      <include refid="Base_Column_List" />
       FROM  mmall_order
       where order_no = #{orderNo}
     </select>

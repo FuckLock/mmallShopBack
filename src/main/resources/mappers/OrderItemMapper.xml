@@ -164,7 +164,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getByOrderNoUserId" resultType="com.mmall.pojo.OrderItem">
+  <select id="getByOrderNoUserId" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"/>
     from mmall_order_item
