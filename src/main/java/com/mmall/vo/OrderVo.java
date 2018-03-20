@@ -8,45 +8,29 @@ public class OrderVo {
 
     private Long orderNo;
 
-    private Integer userId;
-
     private Integer shippingId;/**/
 
     private BigDecimal payment;
 
     private Integer paymentType;
 
+    private String paymentTypeDesc;
+
     private Integer postage;
 
     private Integer status;
 
-    private Date paymentTime;
+    private String StatusDesc;
 
-    private Date sendTime;
+    private String paymentTime;
 
-    private Date endTime;
+    private String sendTime;
 
-    private Date closeTime;
+    private String endTime;
 
-    private Date createTime;
-    private  String paymentTypeDesc;
-    private  String StatusDesc;
+    private String closeTime;
 
-    public String getPaymentTypeDesc() {
-        return paymentTypeDesc;
-    }
-
-    public void setPaymentTypeDesc(String paymentTypeDesc) {
-        this.paymentTypeDesc = paymentTypeDesc;
-    }
-
-    public String getStatusDesc() {
-        return StatusDesc;
-    }
-
-    public void setStatusDesc(String statusDesc) {
-        StatusDesc = statusDesc;
-    }
+    private String createTime;
 
     //订单的明细
     private List<OrderItemVo> orderItemVoList;
@@ -64,36 +48,12 @@ public class OrderVo {
         this.orderNo = orderNo;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
     public Integer getShippingId() {
         return shippingId;
     }
 
     public void setShippingId(Integer shippingId) {
         this.shippingId = shippingId;
-    }
-
-    public String getReceiverName() {
-        return receiverName;
-    }
-
-    public void setReceiverName(String receiverName) {
-        this.receiverName = receiverName;
-    }
-
-    public ShippingVo getShippingVo() {
-        return shippingVo;
-    }
-
-    public void setShippingVo(ShippingVo shippingVo) {
-        this.shippingVo = shippingVo;
     }
 
     public BigDecimal getPayment() {
@@ -112,6 +72,14 @@ public class OrderVo {
         this.paymentType = paymentType;
     }
 
+    public String getPaymentTypeDesc() {
+        return paymentTypeDesc;
+    }
+
+    public void setPaymentTypeDesc(String paymentTypeDesc) {
+        this.paymentTypeDesc = paymentTypeDesc;
+    }
+
     public Integer getPostage() {
         return postage;
     }
@@ -128,43 +96,51 @@ public class OrderVo {
         this.status = status;
     }
 
-    public Date getPaymentTime() {
+    public String getStatusDesc() {
+        return StatusDesc;
+    }
+
+    public void setStatusDesc(String statusDesc) {
+        StatusDesc = statusDesc;
+    }
+
+    public String getPaymentTime() {
         return paymentTime;
     }
 
-    public void setPaymentTime(Date paymentTime) {
+    public void setPaymentTime(String paymentTime) {
         this.paymentTime = paymentTime;
     }
 
-    public Date getSendTime() {
+    public String getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(Date sendTime) {
+    public void setSendTime(String sendTime) {
         this.sendTime = sendTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
-    public Date getCloseTime() {
+    public String getCloseTime() {
         return closeTime;
     }
 
-    public void setCloseTime(Date closeTime) {
+    public void setCloseTime(String closeTime) {
         this.closeTime = closeTime;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -182,5 +158,21 @@ public class OrderVo {
 
     public void setImageHost(String imageHost) {
         this.imageHost = imageHost;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public ShippingVo getShippingVo() {
+        return shippingVo;
+    }
+
+    public void setShippingVo(ShippingVo shippingVo) {
+        this.shippingVo = shippingVo;
     }
 }

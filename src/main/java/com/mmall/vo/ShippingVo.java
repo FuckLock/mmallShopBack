@@ -20,8 +20,6 @@ public class ShippingVo {
 
     private String receiverZip;
 
-    private Date createTime;
-
     public String getReceiverName() {
         return receiverName;
     }
@@ -86,11 +84,4 @@ public class ShippingVo {
         this.receiverZip = receiverZip;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 }

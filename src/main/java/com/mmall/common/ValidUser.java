@@ -16,7 +16,8 @@ public class ValidUser {
     // 判断是否是管理员用户
     @Around("execution(* com.mmall.controller.CategoryManageController.*(..)) " +
             "or execution(* com.mmall.controller.ProductController.*(..)) " +
-            "or execution(* com.mmall.controller.ProductManageController.*(..))" )
+            "or execution(* com.mmall.controller.ProductManageController.*(..)) " +
+            "or execution(* com.mmall.controller.OrderManageController.*(..))" )
     public Object validIdentity(ProceedingJoinPoint joinPoint) throws Throwable {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
