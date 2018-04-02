@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
+
+//guava缓存，已经用redis替代，此类已经废弃，可以当参考。
 public class TokenCache {
 
     private static Logger logger = LoggerFactory.getLogger(TokenCache.class);

@@ -9,6 +9,7 @@ public class Const {
     public static final String CURRENT_USER = "currentUser";
     public static final String EMAIL = "email";
     public static final String USERNAME = "username";
+    public static final String TOKEN_PREFIX = "token_";
 
     public interface Role {
         int ROLE_CUSTOMER = 0; //普通用户
@@ -136,5 +137,9 @@ public class Const {
             throw new RuntimeException("么有找到对应的枚举");
         }
 
+    }
+
+    public interface RedisCacheExtime {
+        public int REDIS_SESSION_EXTIME = 60 * 30;
     }
 }
