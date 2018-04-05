@@ -55,8 +55,41 @@
     </bean>
 
     <!-- aop 切面 -->
-
     <!-- 开启aop注解方式 -->
     <aop:aspectj-autoproxy proxy-target-class="true" />
+
+    <mvc:interceptors>
+        <!-- 定义在这里的，所有的都会拦截-->
+        <mvc:interceptor>
+            <!--manage/a.do  /manage/*-->
+            <!--manage/b.do  /manage/*-->
+            <!--manage/product/save.do /manage/**-->
+            <!--manage/order/detail.do /manage/**-->
+            <mvc:mapping path="/user/**"/>
+            <mvc:mapping path="/cart/**"/>
+            <mvc:mapping path="/order/**"/>
+            <mvc:mapping path="/product/**"/>
+            <mvc:mapping path="/shipping/**"/>
+
+            <mvc:exclude-mapping path="/user/login.do"/>
+            <mvc:exclude-mapping path="/user/logout.do"/>
+            <mvc:exclude-mapping path="/user/register.do"/>
+            <mvc:exclude-mapping path="/user/check_valid.do"/>
+            <mvc:exclude-mapping path="/user/forget_get_question.do"/>
+            <mvc:exclude-mapping path="/user/forget_check_answer.do"/>
+            <mvc:exclude-mapping path="/user/forget_reset_password.do"/>
+
+            <bean class="com.mmall.controller.common.interceptor.AuthLoginInterceptor" />
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <mvc:mapping path="/manage/category/**"/>
+            <mvc:mapping path="/manage/order/**"/>
+            <mvc:mapping path="/manage/product/**"/>
+
+            <bean class="com.mmall.controller.common.interceptor.AuthAdminInterceptor" />
+        </mvc:interceptor>
+
+    </mvc:interceptors>
 
 </beans>

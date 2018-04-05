@@ -68,17 +68,8 @@ public class UserController {
     @RequestMapping(value = "get_user_info.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpServletRequest httpServletRequest){
-        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-        if(StringUtils.isEmpty(loginToken)){
-            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
-        }
-        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-        User user = JsonUtil.string2Obj(userJsonStr, User.class);
-
-        if(user != null){
-            return ServerResponse.createBySuccess(user);
-        }
-        return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
+        User user = (User)httpServletRequest.getAttribute("user");
+        return ServerResponse.createBySuccess(user);
     }
 
     @RequestMapping(value = "forget_get_question.do", method = RequestMethod.POST)
@@ -86,7 +77,6 @@ public class UserController {
     public ServerResponse<String> forgetGetQuestion(String username){
         return iUserService.selectQuestion(username);
     }
-
 
     @RequestMapping(value = "forget_check_answer.do", method = RequestMethod.POST)
     @ResponseBody
@@ -97,39 +87,21 @@ public class UserController {
     @RequestMapping(value = "forget_reset_password.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> forgetRestPassword(String username, String passwordNew, String forgetToken){
-        return iUserService.forgetResetPassword(username,passwordNew,forgetToken);
+        return iUserService.forgetResetPassword(username, passwordNew, forgetToken);
     }
 
     @RequestMapping(value = "reset_password.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> resetPassword(HttpServletRequest httpServletRequest, String passwordOld, String passwordNew){
-        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-        if(StringUtils.isEmpty(loginToken)){
-            return ServerResponse.createByErrorMessage("用户未登录");
-        }
-        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-        User user = JsonUtil.string2Obj(userJsonStr, User.class);
-
-        if(user == null){
-            return ServerResponse.createByErrorMessage("用户未登录");
-        }
-
-        return iUserService.resetPassword(passwordOld,passwordNew,user);
+        User user = (User)httpServletRequest.getAttribute("user");
+        return iUserService.resetPassword(passwordOld, passwordNew, user);
     }
 
     @RequestMapping(value = "update_information.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> update_information(HttpServletRequest httpServletRequest, User user){
+        User currentUser = (User)httpServletRequest.getAttribute("user");
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-        if(StringUtils.isEmpty(loginToken)){
-            return ServerResponse.createByErrorMessage("用户未登录");
-        }
-        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-        User currentUser = JsonUtil.string2Obj(userJsonStr, User.class);
-
-        if(currentUser == null){
-            return ServerResponse.createByErrorMessage("用户未登录");
-        }
         user.setId(currentUser.getId());
         user.setUsername(currentUser.getUsername());
         ServerResponse<User> response = iUserService.updateInformation(user);
@@ -143,17 +115,8 @@ public class UserController {
     @RequestMapping(value = "getInformation.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> get_information(HttpServletRequest httpServletRequest){
-        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-        if(StringUtils.isEmpty(loginToken)){
-            return ServerResponse.createByErrorMessage("用户未登录");
-        }
-        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-        User currentUser = JsonUtil.string2Obj(userJsonStr, User.class);
-
-        if(currentUser == null){
-            return ServerResponse.createByErrorMessage("用户未登录");
-        }
-        return iUserService.getInformation(currentUser.getId());
+        User user = (User)httpServletRequest.getAttribute("user");
+        return iUserService.getInformation(user.getId());
     }
 
 }
