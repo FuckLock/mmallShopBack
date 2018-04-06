@@ -131,7 +131,7 @@ public class CartServiceImpl implements ICartService{
         if(productId == null || count == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
-        Cart cart = cartMapper.selectCartByUserIdProductId(userId,productId);
+        Cart cart = cartMapper.selectCartByUserIdProductId(userId, productId);
         if(cart != null){
             cart.setQuantity(count);
         }

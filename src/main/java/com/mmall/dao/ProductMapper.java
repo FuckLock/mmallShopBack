@@ -25,4 +25,6 @@ public interface ProductMapper {
     List<Product> selectByNameAndCategoryIds(@Param("productName")String productName, @Param("categoryIdList")List<Integer> categoryIdList);
 
     int updateStatusByPrimaryKey(@Param("productId")Integer productId, @Param("status")Integer status);
+
+    Integer selectStockByProductId(Integer productId);
 }

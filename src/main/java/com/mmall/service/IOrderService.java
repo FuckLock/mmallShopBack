@@ -6,7 +6,7 @@ import com.mmall.vo.OrderVo;
 
 import java.util.Map;
 
-public interface IOrderservice {
+public interface IOrderService {
     ServerResponse pay(Long orderNo, Integer userId, String path);
 
     ServerResponse aliCallback(Map<String, String> params);
@@ -30,4 +30,6 @@ public interface IOrderservice {
     ServerResponse<PageInfo> manageSearch(Long orderNo, int pageNum, int pageSize);
 
     ServerResponse<String> manageSendGoods(Long orderNo);
+
+    Integer closeOrder(int hour);
 }

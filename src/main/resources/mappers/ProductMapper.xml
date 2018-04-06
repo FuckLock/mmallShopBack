@@ -224,4 +224,11 @@
     where id = #{productId}
   </update>
 
+  <select id="selectStockByProductId" parameterType="int" resultType="int">
+    select
+    stock
+    from mmall_product
+    where id = #{id}
+    for update
+  </select>
 </mapper>
