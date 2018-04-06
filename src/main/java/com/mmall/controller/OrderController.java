@@ -7,7 +7,7 @@ import com.google.common.collect.Maps;
 import com.mmall.common.Const;
 import com.mmall.common.ServerResponse;
 import com.mmall.pojo.User;
-import com.mmall.service.IOrderservice;
+import com.mmall.service.IOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import java.util.Map;
 public class OrderController {
 
     @Autowired
-    private IOrderservice iOrderService;
+    private IOrderService iOrderService;
 
     private static  final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
