@@ -47,6 +47,10 @@ public class RedisCluster {
         initPool();
     }
 
+    public static void returnResource(JedisCluster jedis){
+        jedisCluster.close();
+    }
+
 //    public  static void  main(String[] args){
 //        JedisCluster jedis = RedisCluster.getJedisCluster();
 //

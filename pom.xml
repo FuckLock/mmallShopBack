@@ -105,11 +105,11 @@
       <scope>compile</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-mapper-asl</artifactId>
-      <version>1.9.12</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.codehaus.jackson</groupId>-->
+      <!--<artifactId>jackson-mapper-asl</artifactId>-->
+      <!--<version>1.9.12</version>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
@@ -168,11 +168,11 @@
       <artifactId>commons-io</artifactId>
       <version>2.0.1</version>
     </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.1.0</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+      <!--<artifactId>jackson-databind</artifactId>-->
+      <!--<version>2.1.0</version>-->
+    <!--</dependency>-->
 
     <!-- spring aop -->
     <dependency>
@@ -240,6 +240,29 @@
       <artifactId>jedis</artifactId>
       <version>2.6.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-avro</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.dyuproject.protostuff</groupId>
+      <artifactId>protostuff-core</artifactId>
+      <version>1.0.8</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.dyuproject.protostuff</groupId>
+      <artifactId>protostuff-runtime</artifactId>
+      <version>1.0.8</version>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>mmall</finalName>
