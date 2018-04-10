@@ -39,7 +39,7 @@ public class RedisShardedPoolUtil {
         return result;
     }
 
-    public static String set(String key,String value){
+    public static String set(String key, String value){
         ShardedJedis jedis = null;
         String result = null;
 
