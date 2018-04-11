@@ -15,7 +15,6 @@
     <context:component-scan base-package="com.mmall">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
-    <bean id="validUser" class="com.mmall.common.ValidUser"></bean>
 
     <import resource="applicationContext-datasource.xml"/>
 

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
-@RequestMapping("manage/product")
+@RequestMapping("/manage/product")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductManageController {
 
