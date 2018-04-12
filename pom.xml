@@ -19,12 +19,6 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>
@@ -122,8 +116,8 @@
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
@@ -262,7 +256,37 @@
       <artifactId>protostuff-runtime</artifactId>
       <version>1.0.8</version>
     </dependency>
-
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>com.jayway.jsonpath</groupId>-->
+      <!--<artifactId>json-path-assert</artifactId>-->
+      <!--<version>0.9.1</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>org.hamcrest</groupId>-->
+      <!--<artifactId>java-hamcrest</artifactId>-->
+      <!--<version>2.0.0.0</version>-->
+      <!--<scope>test</scope>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+      <!--<groupId>net.minidev</groupId>-->
+      <!--<artifactId>json-smart</artifactId>-->
+      <!--<version>2.0</version>-->
+    <!--</dependency>-->
   </dependencies>
   <build>
     <finalName>mmall</finalName>
