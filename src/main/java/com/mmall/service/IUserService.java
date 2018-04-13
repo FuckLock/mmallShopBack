@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 public interface IUserService {
 
-    ServerResponse<User> login(String username, String password, HttpSession session);
+    ServerResponse<User> login(String username, String password);
 
     ServerResponse<String> register(User user);
 

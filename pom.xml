@@ -147,7 +147,7 @@
     <dependency>
         <groupId>commons-net</groupId>
         <artifactId>commons-net</artifactId>
-        <version>3.1</version>` `
+        <version>3.1</version>
     </dependency>
 
     <!-- file upload -->
@@ -234,6 +234,8 @@
       <artifactId>jedis</artifactId>
       <version>2.6.0</version>
     </dependency>
+
+    <!-- redisson 用于redis 锁-->
     <dependency>
       <groupId>org.redisson</groupId>
       <artifactId>redisson</artifactId>
@@ -245,6 +247,7 @@
       <version>2.9.0</version>
     </dependency>
 
+    <!-- protostuff 用于序列化-->
     <dependency>
       <groupId>com.dyuproject.protostuff</groupId>
       <artifactId>protostuff-core</artifactId>
@@ -256,37 +259,28 @@
       <artifactId>protostuff-runtime</artifactId>
       <version>1.0.8</version>
     </dependency>
+
+    <!-- junit -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>RELEASE</version>
+      <version>4.9</version>
     </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>RELEASE</version>
-    </dependency>
+
+    <!-- jsonpath -->
     <dependency>
       <groupId>com.jayway.jsonpath</groupId>
       <artifactId>json-path</artifactId>
-      <version>2.0.0</version>
+      <version>0.9.1</version>
     </dependency>
-    <!--<dependency>-->
-      <!--<groupId>com.jayway.jsonpath</groupId>-->
-      <!--<artifactId>json-path-assert</artifactId>-->
-      <!--<version>0.9.1</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>org.hamcrest</groupId>-->
-      <!--<artifactId>java-hamcrest</artifactId>-->
-      <!--<version>2.0.0.0</version>-->
-      <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>net.minidev</groupId>-->
-      <!--<artifactId>json-smart</artifactId>-->
-      <!--<version>2.0</version>-->
-    <!--</dependency>-->
+
+    <dependency>
+      <groupId>com.jayway.jsonpath</groupId>
+      <artifactId>json-path-assert</artifactId>
+      <version>0.9.1</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>mmall</finalName>

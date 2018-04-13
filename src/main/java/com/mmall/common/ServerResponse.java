@@ -45,23 +45,40 @@ public class ServerResponse<T> implements Serializable {
     }
 
     public static <T> ServerResponse<T> createBySuccess(){
-        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode());
+        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getDesc());
     }
 
-    public static <T> ServerResponse<T> createBySuccessMessage(String msg){
-        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), msg);
+    public static <T> ServerResponse<T> createBySuccess(String sucessMessage){
+        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), sucessMessage);
     }
 
     public static <T> ServerResponse<T> createBySuccess(T data){
-        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), data);
+        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), ResponseCode.SUCCESS.getDesc(), data);
     }
 
-    public static <T> ServerResponse<T> createBySuccess(String msg,T data){
-        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), msg, data);
+    public static <T> ServerResponse<T> createBySuccess(String sucessMessage, T data){
+        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), sucessMessage, data);
+    }
+
+    public static <T> ServerResponse<T> createBySuccess(int sucessCode, String sucessMessage, T data){
+        return new ServerResponse<T>(sucessCode, sucessMessage, data);
     }
 
     public static <T> ServerResponse<T> createByError(){
         return new ServerResponse<T>(ResponseCode.ERROR.getCode(), ResponseCode.ERROR.getDesc());
+    }
+
+    public static <T> ServerResponse<T> createByError(String errorMessage){
+        return new ServerResponse<T>(ResponseCode.ERROR.getCode(), errorMessage);
+    }
+
+    public static <T> ServerResponse<T> createByError(int errorCode, String errorMessage){
+        return new ServerResponse<T>(errorCode, errorMessage);
+    }
+
+    // 后面方法重构后会被废弃
+    public static <T> ServerResponse<T> createBySuccessMessage(String msg){
+        return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(), msg);
     }
 
     public static <T> ServerResponse<T> createByErrorMessage(String errorMessage){
@@ -71,7 +88,5 @@ public class ServerResponse<T> implements Serializable {
     public static <T> ServerResponse<T> createByErrorCodeMessage(int errorCode,String errorMessage){
         return new ServerResponse<T>(errorCode, errorMessage);
     }
-
-
 
 }

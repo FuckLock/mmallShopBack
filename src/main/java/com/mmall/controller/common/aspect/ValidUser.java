@@ -16,7 +16,13 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 
-
+/**
+ * aspect 方式验证用户登录和管理员
+ * 如果使用这种方式您需要做的是：
+ * 1.打开下面的注释
+ * 2.在springmvc的配置文件dispathcer-servlet.xml中加上下面一句话即可
+ * <aop:aspectj-autoproxy proxy-target-class="true" />
+ */
 //@Aspect
 //@Component
 public class ValidUser {

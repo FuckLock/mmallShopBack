@@ -26,45 +26,46 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-  <filter>
-    <filter-name>authLoginFilter</filter-name>
-    <filter-class>com.mmall.controller.common.filter.AuthLoginFilter</filter-class>
-  </filter>
+  <!-- spring filter方式验证用户登录和管理员如何需要可以打开-->
+  <!--<filter>-->
+    <!--<filter-name>authLoginFilter</filter-name>-->
+    <!--<filter-class>com.mmall.controller.common.filter.AuthLoginFilter</filter-class>-->
+  <!--</filter>-->
 
-  <filter-mapping>
-    <filter-name>authLoginFilter</filter-name>
-    <url-pattern>/cart/*</url-pattern>
-  </filter-mapping>
+  <!--<filter-mapping>-->
+    <!--<filter-name>authLoginFilter</filter-name>-->
+    <!--<url-pattern>/cart/*</url-pattern>-->
+  <!--</filter-mapping>-->
 
-  <filter-mapping>
-    <filter-name>authLoginFilter</filter-name>
-    <url-pattern>/order/*</url-pattern>
-  </filter-mapping>
+  <!--<filter-mapping>-->
+    <!--<filter-name>authLoginFilter</filter-name>-->
+    <!--<url-pattern>/order/*</url-pattern>-->
+  <!--</filter-mapping>-->
 
-  <filter-mapping>
-    <filter-name>authLoginFilter</filter-name>
-    <url-pattern>/shipping/*</url-pattern>
-  </filter-mapping>
+  <!--<filter-mapping>-->
+    <!--<filter-name>authLoginFilter</filter-name>-->
+    <!--<url-pattern>/shipping/*</url-pattern>-->
+  <!--</filter-mapping>-->
 
-  <filter>
-    <filter-name>authAdminFilter</filter-name>
-    <filter-class>com.mmall.controller.common.filter.AuthAdminFilter</filter-class>
-  </filter>
+  <!--<filter>-->
+    <!--<filter-name>authAdminFilter</filter-name>-->
+    <!--<filter-class>com.mmall.controller.common.filter.AuthAdminFilter</filter-class>-->
+  <!--</filter>-->
 
-    <filter-mapping>
-        <filter-name>authAdminFilter</filter-name>
-        <url-pattern>/manage/category/*</url-pattern>
-    </filter-mapping>
+    <!--<filter-mapping>-->
+        <!--<filter-name>authAdminFilter</filter-name>-->
+        <!--<url-pattern>/manage/category/*</url-pattern>-->
+    <!--</filter-mapping>-->
 
-    <filter-mapping>
-        <filter-name>authAdminFilter</filter-name>
-        <url-pattern>/manage/order/*</url-pattern>
-    </filter-mapping>
+    <!--<filter-mapping>-->
+        <!--<filter-name>authAdminFilter</filter-name>-->
+        <!--<url-pattern>/manage/order/*</url-pattern>-->
+    <!--</filter-mapping>-->
 
-    <filter-mapping>
-        <filter-name>authAdminFilter</filter-name>
-        <url-pattern>/manage/product/*</url-pattern>
-    </filter-mapping>
+    <!--<filter-mapping>-->
+        <!--<filter-name>authAdminFilter</filter-name>-->
+        <!--<url-pattern>/manage/product/*</url-pattern>-->
+    <!--</filter-mapping>-->
 
   <filter>
     <filter-name>sessionExpireFilter</filter-name>
