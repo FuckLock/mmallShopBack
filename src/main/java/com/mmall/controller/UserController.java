@@ -61,7 +61,7 @@ public class UserController {
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpServletRequest httpServletRequest){
         User user = (User)httpServletRequest.getAttribute("user");
-        return ServerResponse.createBySuccess("获取用户信息成功, user");
+        return ServerResponse.createBySuccess("获取用户信息成功", user);
     }
 
     @RequestMapping(value = "forget_get_question.do", method = RequestMethod.POST)
@@ -104,7 +104,7 @@ public class UserController {
         return response;
     }
 
-    @RequestMapping(value = "getInformation.do", method = RequestMethod.POST)
+    @RequestMapping(value = "get_information.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> get_information(HttpServletRequest httpServletRequest){
         User user = (User)httpServletRequest.getAttribute("user");

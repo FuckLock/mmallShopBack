@@ -88,13 +88,13 @@ public class UserServiceImpl implements IUserService {
     public ServerResponse selectQuestion(String username){
         int resultCount = userMapper.checkUsername(username);
         if(resultCount == 0){
-            return ServerResponse.createByErrorMessage("用户名不存在");
+            return ServerResponse.createByError("用户不存在");
         }
         String question = userMapper.selectQuestionByUsername(username);
-        if(org.apache.commons.lang3.StringUtils.isNotBlank(question)){
+        if(StringUtils.isNotBlank(question)){
             return ServerResponse.createBySuccess(question);
         }
-        return ServerResponse.createByErrorMessage("找回密码的问题是空的");
+        return ServerResponse.createByError("找回密码的问题是空的");
     }
 
     public ServerResponse<String> checkAnswer(String username, String question, String answer){
@@ -139,14 +139,14 @@ public class UserServiceImpl implements IUserService {
         //防止横向越权,要校验一下这个用户的旧密码,一定要指定是这个用户.因为我们会查询一个count(1),如果不指定id,那么结果就是true啦count>0;
         int resultCount = userMapper.checkPassword(MD5Util.MD5EncodeUtf8(passwordOld), user.getId());
         if(resultCount == 0){
-            return ServerResponse.createByErrorMessage("旧密码错误");
+            return ServerResponse.createByError("旧密码错误");
         }
         user.setPassword(MD5Util.MD5EncodeUtf8(passwordNew));
         int updateCount = userMapper.updateByPrimaryKeySelective(user);
         if(updateCount > 0){
-            return ServerResponse.createBySuccessMessage("密码更新成功");
+            return ServerResponse.createBySuccess("密码更新成功");
         }
-        return ServerResponse.createByErrorMessage("密码更新失败");
+        return ServerResponse.createByError("密码更新失败");
     }
 
     public ServerResponse<User> updateInformation(User user){
@@ -154,8 +154,9 @@ public class UserServiceImpl implements IUserService {
         //email也要进行一个校验,校验新的email是不是已经存在,并且存在的email如果相同的话,不能是我们当前的这个用户的.
         int resultCount = userMapper.checkEmailByUserId(user.getEmail(), user.getId());
         if(resultCount > 0){
-            return ServerResponse.createByErrorMessage("email已存在,请更换email再尝试更新");
+            return ServerResponse.createByError("email已存在,请更换email再尝试更新");
         }
+
         User updateUser = new User();
         updateUser.setId(user.getId());
         updateUser.setEmail(user.getEmail());
@@ -167,15 +168,15 @@ public class UserServiceImpl implements IUserService {
         if(updateCount > 0){
             return ServerResponse.createBySuccess("更新个人信息成功",updateUser);
         }
-        return ServerResponse.createByErrorMessage("更新个人信息失败");
+        return ServerResponse.createByError("更新个人信息失败");
     }
 
     public ServerResponse<User> getInformation(Integer userId){
         User user = userMapper.selectByPrimaryKey(userId);
         if(user == null){
-            return ServerResponse.createByErrorMessage("找不到当前用户");
+            return ServerResponse.createByError("找不到当前用户");
         }
-        user.setPassword(org.apache.commons.lang3.StringUtils.EMPTY);
+        user.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySuccess(user);
     }
 
