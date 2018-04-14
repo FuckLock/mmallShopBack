@@ -15,6 +15,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
+/**
+ * spring filter方式验证管理员
+ * 如果您使用下面方式您需要做的如下
+ * 1.打开springmvc的dispathcer-servlet.xml中的注释filter部分的代码即可
+ */
 public class AuthAdminFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

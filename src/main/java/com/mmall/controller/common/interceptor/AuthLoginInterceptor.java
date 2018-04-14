@@ -19,6 +19,12 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * 此项目默认使用这种方式，下面做了简单说明
+ * springmvc 拦截器方式验证登录
+ * 如果你使用这种方式，你需要做的是
+ * 1.springmvc的dispathcer-servlet.xml中配置interceptor的配置即可
+ */
 public class AuthLoginInterceptor  implements HandlerInterceptor {
 
     private static Logger logger = LoggerFactory.getLogger(AuthLoginInterceptor.class);

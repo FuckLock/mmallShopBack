@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CookieUtil {
 
     private static Logger logger = LoggerFactory.getLogger(CookieUtil.class);
-    private final static String COOKIE_DOMAIN = ".bdderic.com";
+    private final static String COOKIE_DOMAIN = ".localhost";
     private final static String COOKIE_NAME = "mmall_login_token";
 
 

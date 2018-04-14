@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.print.Pageable;
 
 @Controller
 @RequestMapping("/user/")
@@ -23,18 +22,18 @@ public class UserController {
     @Autowired
     private IUserService iUserService;
 
-    // 用户登陆
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session, HttpServletResponse httpServletResponse){
 
-        ServerResponse<User> response = iUserService.login(username, password, session);
+        ServerResponse<User> response = iUserService.login(username, password);
 
         if(response.isSuccess()){
             CookieUtil.writeLoginToken(httpServletResponse, session.getId());
             RedisShardedPoolUtil.setEx(session.getId(), JsonUtil.obj2String(response.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
         }
-        return  response;
+
+        return response;
     }
 
     @RequestMapping(value = "logout.do", method = RequestMethod.POST)
@@ -43,7 +42,7 @@ public class UserController {
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         CookieUtil.delLoginToken(httpServletRequest, httpServletResponse);
         RedisShardedPoolUtil.del(loginToken);
-        return ServerResponse.createBySuccess();
+        return ServerResponse.createBySuccess("退出登录成功");
     }
 
     @RequestMapping(value = "register.do", method = RequestMethod.POST)
@@ -55,14 +54,14 @@ public class UserController {
     @RequestMapping(value = "check_valid.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> checkValid(String str, String type){
-        return iUserService.checkValid(str,type);
+        return iUserService.checkValid(str, type);
     }
 
     @RequestMapping(value = "get_user_info.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpServletRequest httpServletRequest){
         User user = (User)httpServletRequest.getAttribute("user");
-        return ServerResponse.createBySuccess(user);
+        return ServerResponse.createBySuccess("获取用户信息成功, user");
     }
 
     @RequestMapping(value = "forget_get_question.do", method = RequestMethod.POST)
