@@ -56,11 +56,15 @@ public class AuthLoginInterceptor  implements HandlerInterceptor {
         logger.info("权限拦截器拦截到请求,className:{},methodName:{},param:{}", className, methodName, requestParamBuffer.toString());
 
         /**
+         * 下面是测试部分代码
+         * =======================================================================
          * 这一小段代码其实是为了mockmvc测试通过，用户登陆我需要去判断浏览器发送过来的cookie
          * 不过测试是没有客户端的，目前这个测试没有研究透，先这样控制测试的登陆吧，登陆后
-         * redis服务器中会有个id为一的key,保存的就是用户的信息，这种方式实际中不可取，
-         * 应该还有办法的，只是没找到。有时间研究下。
+         * redis服务器中会有个key（是我们测试时候传过来的httpsession）,保存的就是用户的信息
+         * ，这种方式实际中不可取，应该还有办法的，只是没找到。有时间研究下。
+         *
          */
+
         boolean reuslt = (httpServletRequest instanceof MockHttpServletRequest);
         if (reuslt) {
             String id = httpServletRequest.getSession().getId();
@@ -81,6 +85,11 @@ public class AuthLoginInterceptor  implements HandlerInterceptor {
             httpServletRequest.setAttribute("user", user);
             return true;
         }
+
+        /**
+         * 上面是测试部分代码
+         * ========================================================================
+         */
 
         //登录验证
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);

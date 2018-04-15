@@ -1,6 +1,7 @@
 package com.mmall.controller;
 
 import com.mmall.common.RedisShardedPool;
+import com.mmall.dao.UserMapper;
 import com.mmall.util.CookieUtil;
 import com.mmall.util.RedisShardedPoolUtil;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
@@ -27,11 +28,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.servlet.http.Cookie;
 import java.util.Random;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,6 +50,9 @@ public class UserControllerTest {
     private MockMvc mockMvc;
 
     private MockHttpSession httpSession;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Before
     public void setup() {
@@ -362,28 +364,44 @@ public class UserControllerTest {
         logger.info("重置密码测试开始");
         // 用户没有登陆的情况下
         RedisShardedPoolUtil.del(httpSession.getId());
-        mockMvc.perform(MockMvcRequestBuilders.post("/user/reset_password.do")
-                .session(httpSession))
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/reset_password.do"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$.msg").value("用户未登录"))
                 .andDo(print());
 
         // 用户登陆的情况下
+        StringBuffer stringBuffer_1 = new StringBuffer();
+        String randId_1 = String.valueOf(new Random().nextInt(999999999));
+        String username_1 = stringBuffer_1.append("test").append(randId_1).toString();
+        String password_1 = stringBuffer_1.append("test").append(randId_1).toString();
+        String email_1 = stringBuffer_1.append("test").append(randId_1).append("@qq.com").toString();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/register.do")
+                .param("username", username_1)
+                .param("password", password_1)
+                .param("email", email_1)
+                .param("phone", "11111111111")
+                .param("question", " ")
+                .param("answer", "答案"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.status").value(0));
+
         mockMvc.perform(MockMvcRequestBuilders.post("/user/login.do")
                 .session(httpSession)
-                .param("username", "admin")
-                .param("password", "admin"))
+                .param("username", username_1)
+                .param("password", password_1))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$.status").value(0))
                 .andReturn().getResponse().getContentAsString();
 
         mockMvc.perform(MockMvcRequestBuilders.post("/user/reset_password.do")
                 .session(httpSession)
-                .param("passwordOld", "admin")
-                .param("passwordNew", "admin"))
+                .param("passwordOld", password_1)
+                .param("passwordNew", password_1))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$.msg").value("密码更新成功"))
                 .andDo(print());
+
         RedisShardedPoolUtil.del(httpSession.getId());
         logger.info("重置密码测试结束");
     }
@@ -459,8 +477,55 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$.msg").value("更新个人信息成功"));
 
-        RedisShardedPoolUtil.del(httpSession.getId();
+        RedisShardedPoolUtil.del(httpSession.getId());
         logger.info("重置密码测试结束");
+    }
+
+    @Test
+    public void whenGetInformation() throws Exception {
+        logger.info("获取用户信息验证开始");
+        // 用户没有登录的时候
+        RedisShardedPoolUtil.del(httpSession.getId());
+        String resultFirst = mockMvc.perform(MockMvcRequestBuilders.post("/user/get_information.do"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.msg").value("用户未登录"))
+                .andReturn().getResponse().getContentAsString();
+        logger.info(resultFirst);
+
+        //用户登录的时候
+        StringBuffer stringBuffer_1 = new StringBuffer();
+        String randId_1 = String.valueOf(new Random().nextInt(999999999));
+        String username_1 = stringBuffer_1.append("test").append(randId_1).toString();
+        String password_1 = stringBuffer_1.append("test").append(randId_1).toString();
+        String email_1 = stringBuffer_1.append("test").append(randId_1).append("@qq.com").toString();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/register.do")
+                .param("username", username_1)
+                .param("password", password_1)
+                .param("email", email_1)
+                .param("phone", "11111111111")
+                .param("question", " ")
+                .param("answer", "答案"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.status").value(0));
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/login.do")
+                .session(httpSession)
+                .param("username", username_1)
+                .param("password", password_1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.status").value(0))
+                .andReturn().getResponse().getContentAsString();
+
+
+        String resultSecond = mockMvc.perform(MockMvcRequestBuilders.post("/user/get_information.do")
+                .session(httpSession))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.msg").value("获取用户成功"))
+                .andReturn().getResponse().getContentAsString();
+        RedisShardedPoolUtil.del(httpSession.getId());
+        logger.info(resultSecond);
+        logger.info("获取用户信息验证结束");
     }
 
 }
