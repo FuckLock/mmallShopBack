@@ -177,7 +177,7 @@ public class UserServiceImpl implements IUserService {
             return ServerResponse.createByError("找不到当前用户");
         }
         user.setPassword(StringUtils.EMPTY);
-        return ServerResponse.createBySuccess(user);
+        return ServerResponse.createBySuccess("获取用户成功", user);
     }
 
     /**
@@ -191,6 +191,5 @@ public class UserServiceImpl implements IUserService {
         }
         return ServerResponse.createByError();
     }
-
 
 }

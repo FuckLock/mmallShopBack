@@ -6,7 +6,7 @@ mmall
 
 **此项目是电商平台的接口项目，分别有用户模块开发,分类管理模块开发,商品管理模块开发,购物车模块开发,收货地址管理模块开发,支付模块开发,订单管理模块开发**
 
-`Java框架采用如下`
+**`Java框架采用如下`**
 
 Spring ``
  
@@ -15,9 +15,7 @@ SpringMvc
 Mybatis
 
 
-
-
-`涉及的核心技术有：`
+**`涉及的核心技术有：`**
 
 tomcat集群
 
@@ -35,52 +33,67 @@ Spring Schedule定时关单
 
 google protostuff(用于序列化和反序列化，比java 内置的性能要好很多，可以考虑)
 
-`目前演进过程`
 
-1.初期只是完成一些接口开发
+**`目前演进过程`**
 
-2.完成所有接口,进行线上部署tomcat(1台)
+_版本一：（完成）_
 
-3.对代码进行重构，比如登录和管理员权限控制，添加了springmvc 拦截器来实现，前期使用的是spring aop实现的都可以
+1.完成所有接口开发
 
-4.添加单点的登录, 使用cookie + redis 方式来实现登录
-
-5.添加了springmvc 全局异常处理
-
-6.springmvc restful方式改造（目前没做）
-
-7.添加redis分布式,此时redis版本为2.8.0,不支持redis-cluster集群，采用 jedissharedpool方式实现分布式，redis服务器
-不需要特殊的要求，开启几个端口就行
-
-8.redis版本提升到3.7.0, 因为redis.3.0后支持redis-cluster，所以改用这种方式. Java实现使用jediscluster,这种
-方式需要对redis服务器进行集群.
-
-9.Spring Schedule + redis 实现定时关单
-
-10.redisson分布式锁
-
-11.tomcat集群方式搭建这个项目 
+2.进行线上部署tomcat(1台)
 
 
+_版本二：（完成）_
 
-`不足点，还需要来点味道，接下来需要做的`
+1.登录和管理员权限使用三种方式实现:
+第一： filter
+第二： spring aop 
+第三： springmvc 拦截器
 
-Spring Security 实现登录
+2.session登录方式切换为 cookie + redis 方式(后面会进一步优化使用spring security)
 
-Spring Security 控制授权
+3.添加了springmvc 全局异常处理, 使用两种方式实现
+第一：springmvc自带的modelview方式
+第二：自定义异常使用 @ControllerAdvice实现
 
-Spring Social 开发第三方登录  微信或者qq
+4.添加redis分布式，使用两种方式实现
+第一： 采用jedisSharedPool方式实现分布式（redis版本小于3.0）
+第二： 采用redis-cluster集群方式实现分布式(redis 3.0后对这个支持了，这种方式在大型项目还需要考验)
 
-Spring Security OAuth 进行认证
+5.Spring Schedule + redis 实现定时关单
 
-redis 主从复制
+6.redis分布式锁,两种方式实现
+第一： redis原生的方式
+第二：使用redission分布式锁（推荐）
 
-redis Sentinel
+7.tomcat集群方式搭建这个项目
 
-nginx 进行进一步调整
+_版本三：（更近进一步）（有时间的情况下正在做的）_
 
-代码进行进一步优化
+1.添加mockmvc测试对controller进行测试，进行测试开发
+
+2.在测试的基础上对其他类进行进一步改造
+
+3.对ServiceResponse使用重载方式，废弃以前不友好的方法
+
+4.自己定义一个注解接口（可能对一些StringUtil判断的做些改造吧）
+
+5.添加 swagger(既然是接口那就必须有这个了)
+
+6.添加Spring Security进行改造登录系统
+
+7.Spring Social 开发第三方登录  微信或者qq
+
+8.Spring Security OAuth 进行认证
+
+9.考虑高并发的情况下，使用多线程对项目中的一些逻辑进行改造。（比如订单定时取消这部分）
+
+10. 自然是使用spring 4.0的，那就应该废弃配置方式，这个也需要改造
+
+11.想不到了，先这样
 
 
-目前先这样吧。。。。。。。。。。
+ 
+
+
 
